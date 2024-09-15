@@ -23,6 +23,9 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
     // set variable "data" equal to the response body in json format
     const data = await response.json();
     
+    // create empty variable to set answer equal to
+    let result;
+
     // now use switch statements to fork the function if certain inputs are detected
     switch (true) {
       // follow this path if "name" parameter exists
@@ -30,21 +33,21 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
         // make the name parameter case insensitive
         const name_input = name.toLowerCase();
         // filter results by variable "name_input"  
-        const specified_name = data.filter((color) => color.name.toLowerCase() == name_input)
-        console.log(specified_name)
+        result = data.filter((color) => color.name.toLowerCase() == name_input)
+        console.log(result)
         break;
       // follow this path if "hex" parameter exists
       case (hex != null):
         // filter results by hex parameter  
-        const specified_hex = data.filter((color) => color.hex == hex)
-        console.log(specified_hex)
+        result = data.filter((color) => color.hex == hex)
+        console.log(result)
         break;
       // follow this path if "compName" parameter exists
       case (compName != null):
         // make the compName parameter case insensitive
         const compName_input = compName.toLowerCase();
         // filter to see if each color's comp array includes the compName parameter in its name element
-        const specified_compName = data.filter((color) => {
+        result = data.filter((color) => {
           // find the first instance in the comp list that contains compName_input string 
           const find_compName = color.comp.find((color) => color.name.toLowerCase().includes(compName_input))
           // if anything's been found, add this color to the array "specified_compName"
@@ -52,11 +55,11 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
             return true;
           }
         })
-        console.log(specified_compName)
+        console.log(result)
         break;
       case (compHex != null):
         // filter to see if each color's comp array includes the compHex parameter in its hex element
-        const specified_compHex = data.filter((color) => {
+        result = data.filter((color) => {
           // find the first instance in the comp list that equals compHex parameter
           const find_compHex = color.comp.find((color) => color.hex == compHex)
           // if anything's been found, add this color to the array "specified_compHex"
@@ -64,19 +67,22 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
             return true;
           }
         })
-        console.log(specified_compHex)
+        console.log(result)
         break;
     }
+
+    // return result
+    return result;
   }
   catch (error) {
     console.log(error)
   }
 };
 
-// fetchColors({name: "MAGENTA"});
-// fetchColors({hex: "7366BD"});
-// fetchColors({compName: "BLUE"})
-fetchColors({compHex: "9FAC58"})
+//  fetchColors({name: "periwinkle"});
+//  fetchColors({hex: "EFDECD"});
+//  fetchColors({compName: "Black"})
+ fetchColors({compHex: "FFFFFF"})
 
 // Leave this here
 //export default fetchColors;
