@@ -34,13 +34,11 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
         const name_input = name.toLowerCase();
         // filter results by variable "name_input"  
         result = data.filter((color) => color.name.toLowerCase() == name_input)
-        console.log(result)
         break;
       // follow this path if "hex" parameter exists
       case (hex != null):
         // filter results by hex parameter  
         result = data.filter((color) => color.hex == hex)
-        console.log(result)
         break;
       // follow this path if "compName" parameter exists
       case (compName != null):
@@ -55,7 +53,6 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
             return true;
           }
         })
-        console.log(result)
         break;
       case (compHex != null):
         // filter to see if each color's comp array includes the compHex parameter in its hex element
@@ -67,7 +64,6 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
             return true;
           }
         })
-        console.log(result)
         break;
     }
 
@@ -79,10 +75,5 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
   }
 };
 
-//  fetchColors({name: "periwinkle"});
-//  fetchColors({hex: "EFDECD"});
-//  fetchColors({compName: "Black"})
- fetchColors({compHex: "FFFFFF"})
-
 // Leave this here
-//export default fetchColors;
+export default fetchColors;
